@@ -8,6 +8,8 @@ import (
 
 func main() {
 	fmt.Println("We work!")
-	restAPI.Go()
+	go func() {
+		restAPI.Run()
+	}()
 
 }

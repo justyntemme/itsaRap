@@ -8,6 +8,6 @@ import (
 func Run() {
 
 	go func() {
-		fmt.Print("goRoutine STarted!")
+		fmt.Print("goRoutine Started!")
 	}()
 }
