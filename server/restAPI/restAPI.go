@@ -43,6 +43,7 @@ func (uc UserController) CreateUser(w http.ResponseWriter, r *http.Request, _ ht
 	u := User{}
 
 	json.NewDecoder(r.Body).Decode(&u)
+	fmt.Println(u.Name)
 
 	//Create bson ID
 	u.Id = bson.NewObjectId()
