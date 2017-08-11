@@ -7,6 +7,7 @@ import { LoggedInComponent } from './logged-in/logged-in.component';
 import { NotificationsComponent } from './notifications/notifications.component';
 import { LoginComponent } from './login/login.component';
 import { PostComponent } from './post/post.component';
+import { CommentsComponent } from './comments/comments.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { PostComponent } from './post/post.component';
     LoggedInComponent,
     NotificationsComponent,
     LoginComponent,
-    PostComponent
+    PostComponent,
+    CommentsComponent
   ],
   imports: [
     BrowserModule
