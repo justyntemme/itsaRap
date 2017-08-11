@@ -31,14 +31,10 @@ type UserController struct {
 //Run Starts Go REST API server
 func Run() {
 
-	go func() {
-		fmt.Print("goRoutine Started!")
-		uc := NewUserController(getSession())
-		r := httprouter.New()
-		r.POST("/user", uc.CreateUser)
-		http.ListenAndServe("localhost:8080", r)
-
-	}()
+	uc := NewUserController(getSession())
+	r := httprouter.New()
+	r.POST("/user", uc.CreateUser)
+	fmt.Println(http.ListenAndServe("localhost:8080", r))
 
 }
 
