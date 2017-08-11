@@ -6,6 +6,7 @@ import (
 	"net/http"
 
 	"github.com/julienschmidt/httprouter"
+	"gopkg.in/mgo.v2"
 )
 
 //.Data
@@ -19,6 +20,11 @@ type User struct {
 	Songs      []string `json:"user_Songs"`
 	Comments   []string `json:"user_comments"`
 	Recordings []string `json:"user_recordings"`
+}
+
+//UserController holds the session value
+type UserController struct {
+	sssion *mgo.Session
 }
 
 //Run Starts Go REST API server
@@ -37,4 +43,8 @@ func createUser(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 	u := new(User)
 	json.NewDecoder(r.Body).Decode(&u)
 
+}
+
+func NewUserController(s *mgo.Session) *UserController {
+	return &UserController{s}
 }
