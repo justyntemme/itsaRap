@@ -8,6 +8,7 @@ import { NotificationsComponent } from './notifications/notifications.component'
 import { LoginComponent } from './login/login.component';
 import { PostComponent } from './post/post.component';
 import { CommentsComponent } from './comments/comments.component';
+import { CreateUserComponent } from './create-user/create-user.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { CommentsComponent } from './comments/comments.component';
     NotificationsComponent,
     LoginComponent,
     PostComponent,
-    CommentsComponent
+    CommentsComponent,
+    CreateUserComponent
   ],
   imports: [
     BrowserModule

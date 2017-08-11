@@ -1,0 +1,16 @@
+
+
+<button class="btn btn-info" (click)="showCA = ! showCA">Create Account</button>
+<div *ngIf="showCA" class="formgroup">
+  <label for="username">Username:</label>
+  <input type="text" class="form-control" id="username">
+
+  <label for="pwd"> Password:</label>
+  <input type="text" class="form-control" id="pwd">
+
+  <label for="pwd2"> Repeat Password:</label>
+  <input type="text" class="form-control" id="pwd2">
+
+  <button class="form-control btn btn-info">Create</button>
+</div>
+

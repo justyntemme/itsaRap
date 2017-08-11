@@ -14,7 +14,7 @@
 
 </div>
 <!-- notifications in Component -->
-<div class="container well col-sm-6">
+<div *ngIf="loggedIn" class="container well col-sm-6">
   <app-notifications></app-notifications>
 </div>
 <!-- main app window -->
