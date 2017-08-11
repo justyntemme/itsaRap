@@ -6,6 +6,7 @@ import (
 	"net/http"
 
 	"github.com/julienschmidt/httprouter"
+	"github.com/rs/cors"
 	"gopkg.in/mgo.v2"
 	"gopkg.in/mgo.v2/bson"
 )
@@ -33,8 +34,14 @@ func Run() {
 
 	uc := NewUserController(getSession())
 	r := httprouter.New()
+	handler := cors.Default().Handler(r)
 	r.POST("/user", uc.CreateUser)
-	fmt.Println(http.ListenAndServe("localhost:8080", r))
+
+	fmt.Println(http.ListenAndServe("localhost:8080", handler))
+
+}
+
+func optionsHandler(w http.ResponseWriter, r *http.Request, _ httprouter.Param) {
 
 }
 
