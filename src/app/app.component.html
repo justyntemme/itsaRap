@@ -1,9 +1,9 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <!-- Login/Logged in Component -->
-<div class="container well col-sm-6">
+<div class="container well col-sm-6 col-lg-3 col-xsm-12">
 
 
-  <div *ngIf="loggedIn == false">
+  <div *ngIf="loggedIn == false" >
     <app-login></app-login>
   </div>
 
@@ -14,11 +14,15 @@
 
 </div>
 <!-- notifications in Component -->
-<div *ngIf="loggedIn" class="container well col-sm-6">
+<div *ngIf="loggedIn" class="container well col-sm-12 col-lg-6">
   <app-notifications></app-notifications>
 </div>
+<!-- Make a post app compnenet -->
+<div class="container well col-sm-12" *ngIf="loggedIn">
+  <app-makea-post></app-makea-post>
+</div>
 <!-- main app window -->
-<div class ="container well col-sm-12">
+<div class ="container well col-sm-12 col-lg-12">
 <app-posts></app-posts>
 </div>
 

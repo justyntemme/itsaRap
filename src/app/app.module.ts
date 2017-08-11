@@ -9,6 +9,7 @@ import { LoginComponent } from './login/login.component';
 import { PostComponent } from './post/post.component';
 import { CommentsComponent } from './comments/comments.component';
 import { CreateUserComponent } from './create-user/create-user.component';
+import { MakeaPostComponent } from './makea-post/makea-post.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { CreateUserComponent } from './create-user/create-user.component';
     LoginComponent,
     PostComponent,
     CommentsComponent,
-    CreateUserComponent
+    CreateUserComponent,
+    MakeaPostComponent
   ],
   imports: [
     BrowserModule

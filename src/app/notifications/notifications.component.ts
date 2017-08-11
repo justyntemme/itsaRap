@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./notifications.component.css']
 })
 export class NotificationsComponent implements OnInit {
+    public showNotifications:boolean = false;
+    public numberofNotifications = 0;
 
   constructor() { }
 

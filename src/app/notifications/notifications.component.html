@@ -1,3 +1,4 @@
-<p>
-  notifications works!
-</p>
+<button class="btn btn-info" (click)="showNotifications = !  showNotifications">{{ numberofNotifications }}</button>
+<div class="well" *ngIf="showNotifications">
+<p>Notification will be displayed here</p>
+</div>
