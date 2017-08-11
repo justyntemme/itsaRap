@@ -55,8 +55,7 @@ func (uc UserController) CreateUser(w http.ResponseWriter, r *http.Request, _ ht
 	if err != nil {
 		fmt.Println(err)
 	}
-
-	w.Header().Set("Content-Type", "text/html; charset=utf-8")
+	//w.Header().Set("Content-Type", "text/html; charset=utf-8")
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusCreated) //201
