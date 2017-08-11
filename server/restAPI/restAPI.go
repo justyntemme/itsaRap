@@ -1,6 +1,7 @@
 package restAPI
 
 import (
+	"encoding/json"
 	"fmt"
 	"net/http"
 
@@ -33,6 +34,7 @@ func Run() {
 }
 
 func createUser(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
-	//json.NewDecoder(r.Body).Decode(//Right Here put user struct)
+	u := new(User)
+	json.NewDecoder(r.Body).Decode(&u)
 
 }
