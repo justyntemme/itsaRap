@@ -129,6 +129,7 @@ func (uc UserController) CreateIPost(w http.ResponseWriter, r *http.Request, _ h
 //CreateUser creates a user entry in the mongoDB
 func (uc UserController) CreateUser(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 	u := User{}
+	result := User{}
 
 	json.NewDecoder(r.Body).Decode(&u)
 	fmt.Println(u)
@@ -137,17 +138,25 @@ func (uc UserController) CreateUser(w http.ResponseWriter, r *http.Request, _ ht
 	u.ID = bson.NewObjectId()
 
 	//store the user in mongodb
-	uc.session.DB("its-a-rap-db").C("users").Insert(u)
-
-	uj, err := json.Marshal(u)
+	err := uc.session.DB("its-a-ra-db").C("users").Find(bson.M{"user_name": u.Name}).One(&result)
 	if err != nil {
 		fmt.Println(err)
 	}
-	w.Header().Set("Content-Type", "text/html; charset=utf-8")
-	//w.Header().Set("Access-Control-Allow-Origin", "*")
-	//w.Header().Set("Content-Type", "application/json")
-	w.WriteHeader(http.StatusCreated) //201
-	fmt.Fprintf(w, "%s\n", uj)
+	if result.Name == u.Name {
+		w.WriteHeader(http.StatusBadRequest)
+	} else {
+		uc.session.DB("its-a-rap-db").C("users").Insert(u)
+
+		uj, err := json.Marshal(u)
+		if err != nil {
+			fmt.Println(err)
+		}
+		w.Header().Set("Content-Type", "text/html; charset=utf-8")
+		//w.Header().Set("Access-Control-Allow-Origin", "*")
+		//w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusCreated) //201
+		fmt.Fprintf(w, "%s\n", uj)
+	}
 
 }
 
