@@ -1,5 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import {HttpClientModule} from '@angular/common/http';
+
 
 import { AppComponent } from './app.component';
 import { PostsComponent } from './posts/posts.component';
@@ -21,10 +23,17 @@ import { MakeaPostComponent } from './makea-post/makea-post.component';
     PostComponent,
     CommentsComponent,
     CreateUserComponent,
-    MakeaPostComponent
+    MakeaPostComponent,
+
+
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    HttpClientModule,
+ 
+  ],
+  exports: [
+  
   ],
   providers: [],
   bootstrap: [AppComponent]
