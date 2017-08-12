@@ -44,6 +44,7 @@ func Run() {
 	r := httprouter.New()
 	handler := cors.Default().Handler(r)
 	r.POST("/user", uc.CreateUser)
+	r.POST("/posts", uc.CreateIPost)
 
 	fmt.Println(http.ListenAndServe("localhost:8080", handler))
 
@@ -80,6 +81,27 @@ func (uc UserController) GetUser(w http.ResponseWriter, r *http.Request, p httpr
 	w.Header().Set("Content-type", "application/json")
 	w.WriteHeader(http.StatusOK) // 200
 	fmt.Fprintf(w, "%s\n", uj)
+}
+
+//Login compares hashed passwords to username and returns complete user info if correct
+func (uc UserController) Login(w http.ResponseWriter, r *http.Response, p httprouter.Params) {
+	u := User{}
+	result := User{}
+
+	json.NewDecoder(r.Body).Decode(&u)
+	fmt.Println(u)
+
+	err := uc.session.DB("its-a-ra-db").C("users").Find(bson.M{"user_name": u.Name}).One(&result)
+	if err != nil {
+		fmt.Println(err)
+	}
+	if result.Pass == u.Pass {
+		w.Header().Set("Content-Type", "text/html; charset=utf-8")
+		w.WriteHeader(http.StatusOK) // 200
+		fmt.Fprintf(w, "%s\n", result)
+	} else {
+		w.WriteHeader(http.StatusNotFound) // 404
+	}
 }
 
 //CreateIPost creates new Ipost entry in the mongoDB
