@@ -22,6 +22,16 @@ export class LoginComponent implements OnInit {
   }
 
   Login(username, password) {
+
+    interface userStruct {
+      username: string;
+      user_ID: string;
+      user_Pass: string;
+      avatar_URL: string;
+      user_Songs: string;//TODO change these to arrays
+      user_comments: string;
+      user_recordings: string;
+  }
      var headers = new Headers();
      var hashedpassword = Md5.hashStr(password)
 
@@ -29,10 +39,12 @@ export class LoginComponent implements OnInit {
 
     headers.append('Content-Type', 'application/json');
 
-    this.http.post('http://127.0.0.1:8080/user',body).subscribe(
+    this.http.post('http://127.0.0.1:8080/login',body).subscribe(
       (response) => {
-        console.log("VALUE RECEIVED: " +response);
+        console.log("VALUE RECEIVED: " +JSON.stringify(response));
+        var currentUser : userStruct = JSON.parse(JSON.stringify(response))
         this.IsLoggedInService.setLoggedIn(true)
+        this.IsLoggedInService.setSessionID(currentUser.user_ID)
       },
       (err) =>{
         console.log("ERROR: " +err);

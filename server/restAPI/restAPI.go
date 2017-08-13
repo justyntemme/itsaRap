@@ -27,9 +27,10 @@ type User struct {
 //Ipost struct is the structure that includes the data for all posts
 type Ipost struct {
 	UserID        bson.ObjectId   `json:"user_Id" bson:"user_Id"`
+	Title         string          `json:"post_Title" bson:"post_Title"`
 	PostID        bson.ObjectId   `json:"post_Id" bson:"post_Id"`
 	Comments      []bson.ObjectId `json:"comment" bson:"comments"`
-	SoundcloudURL string          `json:"soundcloud_url" bson:"soundcloud_url"`
+	SoundcloudURL string          `json:"soundcloud_URL" bson:"soundcloud_url"`
 }
 
 //UserController holds the session value

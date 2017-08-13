@@ -1,8 +1,8 @@
 <div class="form-group">
-  <label for="scURL">SoundcloutURL:</label>
+  <label #soundcloudURL for="scURL">SoundcloutURL:</label>
   <input type="URL" class="form-control" id="scURL">
 
   <label for="title">Title:</label>
-  <input type="text" class="form-control" id="scURL">
-  <button class="btn-info btn">Submit</button>
+  <input #title type="text" class="form-control" id="title">
+  <button (click)="postIpost(soundcloudURL.value, title.value)" class="btn-info btn">Submit</button>
 </div>
