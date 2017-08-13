@@ -17,10 +17,12 @@ export class MakeaPostComponent implements OnInit {
   }
 
 
-   postIpost(souncloudURL, Title) {
-     console.log(this.CookieService.get('session-id'));
+   postIpost(soundcloudURL, Title) {
 
-    var body : string = `{"user_Id": "` + this.CookieService.get('session-id'); + `", "Title":  "` + Title + `", "soundcloud_URL": "` + souncloudURL + `"`
+     var sessionId = this.CookieService.get('session-id');
+
+    var body  = `{"user_Id": "` + this.CookieService.get('session-id') + `", "post_title":  "` + Title + `", "soundcloud_URL": "` + soundcloudURL + `"}`;
+
 
      this.http.post('http://127.0.0.1:8080/posts',body).subscribe(
       (response) => {
