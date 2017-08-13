@@ -59,6 +59,7 @@ func optionsHandler(w http.ResponseWriter, r *http.Request, _ httprouter.Param) 
 //GetAllPosts retreives all new posts from mongodb
 func (uc UserController) GetAllPosts(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 	posts := uc.session.DB("its-a-rap-db").C("iposts").Find(bson.M{})
+	fmt.Println(posts)
 
 	pj, err := json.Marshal(posts)
 	if err != nil {
