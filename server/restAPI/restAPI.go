@@ -45,6 +45,7 @@ func Run() {
 	handler := cors.Default().Handler(r)
 	r.POST("/user", uc.CreateUser)
 	r.POST("/posts", uc.CreateIPost)
+	r.POST("/login", uc.Login)
 
 	fmt.Println(http.ListenAndServe("localhost:8080", handler))
 
@@ -84,7 +85,7 @@ func (uc UserController) GetUser(w http.ResponseWriter, r *http.Request, p httpr
 }
 
 //Login compares hashed passwords to username and returns complete user info if correct
-func (uc UserController) Login(w http.ResponseWriter, r *http.Response, p httprouter.Params) {
+func (uc UserController) Login(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 	u := User{}
 	result := User{}
 
