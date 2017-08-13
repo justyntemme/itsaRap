@@ -46,6 +46,7 @@ export class CreateUserComponent implements OnInit {
       },
       (err) =>{
         console.log("ERROR: " +err);
+        alert("User not created. Username already taken")
       },
       () => {
         console.log("Completed");
