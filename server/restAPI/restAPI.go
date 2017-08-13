@@ -96,7 +96,7 @@ func (uc UserController) Login(w http.ResponseWriter, r *http.Request, _ httprou
 	if err != nil {
 		fmt.Println(err)
 	}
-	if result.Pass == u.Pass {
+	if result.Pass != u.Pass {
 		w.Header().Set("Content-Type", "text/html; charset=utf-8")
 		w.WriteHeader(http.StatusOK) // 200
 		fmt.Fprintf(w, "%s\n", result)
