@@ -47,6 +47,7 @@ func Run() {
 	r.POST("/user", uc.CreateUser)
 	r.POST("/posts", uc.CreateIPost)
 	r.POST("/login", uc.Login)
+	r.GET("/posts", uc.GetAllPosts)
 
 	fmt.Println(http.ListenAndServe("localhost:8080", handler))
 
