@@ -92,7 +92,7 @@ func (uc UserController) Login(w http.ResponseWriter, r *http.Request, _ httprou
 	json.NewDecoder(r.Body).Decode(&u)
 	fmt.Println(u)
 
-	err := uc.session.DB("its-a-ra-db").C("users").Find(bson.M{"user_name": u.Name}).One(&result)
+	err := uc.session.DB("its-a-rap-db").C("users").Find(bson.M{"user_name": u.Name}).One(&result)
 	if err != nil {
 		fmt.Println(err)
 	}
@@ -101,6 +101,7 @@ func (uc UserController) Login(w http.ResponseWriter, r *http.Request, _ httprou
 		w.WriteHeader(http.StatusOK) // 200
 		fmt.Fprintf(w, "%s\n", result)
 	} else {
+		fmt.Println("incorrect user/pass: user Not Found")
 		w.WriteHeader(http.StatusNotFound) // 404
 	}
 }
