@@ -97,9 +97,13 @@ func (uc UserController) Login(w http.ResponseWriter, r *http.Request, _ httprou
 		fmt.Println(err)
 	}
 	if result.Pass == u.Pass {
+		rj, err := json.Marshal(result)
+		if err != nil {
+			fmt.Println(err)
+		}
 		w.Header().Set("Content-Type", "text/html; charset=utf-8")
 		w.WriteHeader(http.StatusOK) // 200
-		fmt.Fprintf(w, "%s\n", result)
+		fmt.Fprintf(w, "%s\n", rj)
 	} else {
 		fmt.Println("incorrect user/pass: user Not Found")
 		w.WriteHeader(http.StatusNotFound) // 404
