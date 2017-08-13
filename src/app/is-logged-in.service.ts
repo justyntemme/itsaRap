@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 @Injectable()
-export default class IsLoggedInService {
+export  class IsLoggedInService {
 
   private loggedIn: boolean = false;
   private userID: string = "";

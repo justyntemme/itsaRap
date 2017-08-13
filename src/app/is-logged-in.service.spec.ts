@@ -1,6 +1,6 @@
 import { TestBed, inject } from '@angular/core/testing';
 
-import  IsLoggedInService  from './is-logged-in.service';
+import  {IsLoggedInService } from './is-logged-in.service';
 
 describe('IsLoggedInService', () => {
   beforeEach(() => {

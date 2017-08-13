@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {HttpClientModule} from '@angular/common/http';
-import IsLoggedInService from './is-logged-in.service'
+import { IsLoggedInService} from './is-logged-in.service'
 
 
 import { AppComponent } from './app.component';
@@ -31,7 +31,8 @@ import { MakeaPostComponent } from './makea-post/makea-post.component';
   imports: [
     BrowserModule,
     HttpClientModule,
-    IsLoggedInService,
+  
+
  
   ],
   exports: [
