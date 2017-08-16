@@ -3,7 +3,11 @@ package restAPI
 import (
 	"encoding/json"
 	"fmt"
+	"io"
 	"net/http"
+	"os"
+	"path"
+	"runtime"
 
 	"github.com/julienschmidt/httprouter"
 	"github.com/rs/cors"
@@ -33,6 +37,16 @@ type Ipost struct {
 	SoundcloudURL string          `json:"soundcloud_URL" bson:"soundcloud_url"`
 }
 
+///LyricReply struct holds the information for all recordings to user recording reply
+type LyricReply struct {
+	UserID       bson.ObjectId `json:"user_Id" bson:"user_Id"`
+	FileID       bson.ObjectId `json:"file_Id" bson:"file_Id"`
+	FilePath     string        `json:"file_Path" bson:"file_Path"`
+	Comments     []string      `json:"comments" bson:"comments"`
+	Username     string        `json:"username"  bson:"username"`
+	ParentPostID bson.ObjectId `json:"parent_Post_Id" bson:"parent_Post_Id"`
+}
+
 //UserController holds the session value
 type UserController struct {
 	session *mgo.Session
@@ -48,12 +62,59 @@ func Run() {
 	r.POST("/posts", uc.CreateIPost)
 	r.POST("/login", uc.Login)
 	r.GET("/posts", uc.GetAllPosts)
+	r.POST("/lreply", uc.uploadReply)
 
 	fmt.Println(http.ListenAndServe("localhost:8080", handler))
 
 }
 
 func optionsHandler(w http.ResponseWriter, r *http.Request, _ httprouter.Param) {
+}
+
+//GetReplys shows replys to a spacific post and returns json serialized string TODO
+func (us UserController) GetReplys(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
+
+}
+
+//uploadReply uploads user reply to an original post TODO
+func (uc UserController) uploadReply(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
+	l := LyricReply{}
+	json.NewDecoder(r.Body).Decode(&l)
+
+	file, handler, err := r.FormFile("file")
+	if err != nil {
+
+		return
+	}
+
+	uploadDir := path.Join(currentDirectory(), "uploads")
+	filename := path.Join(uploadDir, handler.Filename)
+	outfile, err := os.Create(filename)
+	if err != nil {
+		//http.Error(r, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	defer outfile.Close()
+
+	if _, err = io.Copy(outfile, file); err != nil {
+		//http.Error(r, err.Error(), http.StatusInternalServerError)
+		return
+
+		fmt.Println(filename)
+	}
+
+	l.FileID = bson.NewObjectId()
+	l.FilePath = filename
+	uc.session.DB("its-a-rap-db").C("lreply").Insert(l)
+
+}
+
+// Returns the current directory we are running in.
+func currentDirectory() string {
+
+	// Locate the current directory for the site.
+	_, fn, _, _ := runtime.Caller(1)
+	return path.Dir(fn)
 }
 
 //GetAllPosts retreives all new posts from mongodb
