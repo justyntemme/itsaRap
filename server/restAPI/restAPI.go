@@ -83,7 +83,7 @@ func (uc UserController) uploadReply(w http.ResponseWriter, r *http.Request, p h
 
 	file, handler, err := r.FormFile("file")
 	if err != nil {
-
+		fmt.Println(err)
 		return
 	}
 
@@ -91,13 +91,13 @@ func (uc UserController) uploadReply(w http.ResponseWriter, r *http.Request, p h
 	filename := path.Join(uploadDir, handler.Filename)
 	outfile, err := os.Create(filename)
 	if err != nil {
-		//http.Error(r, err.Error(), http.StatusInternalServerError)
+		fmt.Println(err)
 		return
 	}
 	defer outfile.Close()
 
 	if _, err = io.Copy(outfile, file); err != nil {
-		//http.Error(r, err.Error(), http.StatusInternalServerError)
+		fmt.Println(err)
 		return
 
 		fmt.Println(filename)
