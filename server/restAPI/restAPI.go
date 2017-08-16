@@ -106,6 +106,9 @@ func (uc UserController) uploadReply(w http.ResponseWriter, r *http.Request, p h
 	l.FileID = bson.NewObjectId()
 	l.FilePath = filename
 	uc.session.DB("its-a-rap-db").C("lreply").Insert(l)
+	w.Header().Set("Content-type", "application-json")
+	w.Header().Set("Access-Control-Allow-Origin", "true")
+	fmt.Fprintf(w, "200OK")
 
 }
 
