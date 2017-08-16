@@ -78,8 +78,11 @@ func (us UserController) GetReplys(w http.ResponseWriter, r *http.Request, p htt
 
 //uploadReply uploads user reply to an original post TODO
 func (uc UserController) uploadReply(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
+	fmt.Println("Well we at least hit the handler...")
 	l := LyricReply{}
 	json.NewDecoder(r.Body).Decode(&l)
+
+	fmt.Println(l)
 
 	file, handler, err := r.FormFile("file")
 	if err != nil {
